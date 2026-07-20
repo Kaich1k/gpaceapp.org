@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Support — GPAce</title>
+    <meta name="description" content="Help with GPAce: Canvas tokens, GPA tracking, purchases, and contact." />
+    <meta name="theme-color" content="#0B0F14" />
+    <link rel="icon" href="assets/favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css?v=5" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="index.html">
+          <img src="assets/icon.png" alt="" width="36" height="36" />
+          GPAce
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li>
+            <a class="nav-cta" data-app-store href="https://apps.apple.com/app/id6792100451">Get the app</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="page">
+      <p class="section-label">Support</p>
+      <h1>We’re here to help.</h1>
+      <p class="lead">
+        Email
+        <a class="text-link" data-support-email="fill" href="mailto:support@gpaceapp.org">support@gpaceapp.org</a>
+        and we’ll get back as soon as we can. Include your iOS version and a short description of the issue.
+      </p>
+
+      <div class="contact-card">
+        <p class="panel-kicker">Contact</p>
+        <p class="panel-title">
+          <a data-support-email="fill" href="mailto:support@gpaceapp.org">support@gpaceapp.org</a>
+        </p>
+        <p>Typical topics: Canvas sync, school search, Pro restore, GPA math questions.</p>
+      </div>
+
+      <h2 id="canvas-token">Connect Canvas with an access token</h2>
+      <ol class="steps">
+        <li>
+          <strong>Open Canvas in a browser</strong>
+          <span>Sign in to your school’s Canvas site (the same URL you use for classes).</span>
+        </li>
+        <li>
+          <strong>Open Account → Settings</strong>
+          <span>On the left (or profile menu), go to Account, then Settings.</span>
+        </li>
+        <li>
+          <strong>New Access Token</strong>
+          <span>Under Approved Integrations, choose New Access Token. Give it a name like “GPAce” and create it.</span>
+        </li>
+        <li>
+          <strong>Copy the token once</strong>
+          <span>Canvas shows the full token only once. Paste it into GPAce before leaving the page.</span>
+        </li>
+        <li>
+          <strong>Import in the app</strong>
+          <span>In GPAce, open the Canvas tab, find your school, paste the token, and sync.</span>
+        </li>
+      </ol>
+      <p class="fine-print">
+        You can revoke the token anytime in Canvas → Account → Settings → Approved Integrations. GPAce stores the token
+        on your device only.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq" role="list">
+        <div class="faq-item" data-faq-item role="listitem">
+          <button type="button" class="faq-q" data-faq-toggle aria-expanded="false">
+            Is manual GPA tracking free?
+          </button>
+          <div class="faq-a">
+            <p>Yes. Adding and editing courses by hand does not require Pro.</p>
+          </div>
+        </div>
+        <div class="faq-item" data-faq-item role="listitem">
+          <button type="button" class="faq-q" data-faq-toggle aria-expanded="false">
+            What does GPAce Pro unlock?
+          </button>
+          <div class="faq-a">
+            <p>
+              Pro is a one-time $9.99 purchase that unlocks Canvas sync (importing and refreshing courses from your
+              school’s Canvas). It is not a subscription. After you unlock, you still need to connect Canvas with an
+              access token before any school courses sync.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item" data-faq-item role="listitem">
+          <button type="button" class="faq-q" data-faq-toggle aria-expanded="false">
+            Why isn’t my school syncing automatically?
+          </button>
+          <div class="faq-a">
+            <p>
+              Finding your school in the list is not the same as connecting. GPAce only syncs after you unlock Pro and
+              paste a Canvas access token (or complete sign-in). Until then, Force Sync and auto-sync won’t pull grades.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item" data-faq-item role="listitem">
+          <button type="button" class="faq-q" data-faq-toggle aria-expanded="false">
+            I bought Pro but Canvas is locked again
+          </button>
+          <div class="faq-a">
+            <p>
+              Open Settings in GPAce and use Restore Purchases (signed in with the same Apple ID). If it still fails,
+              email us with the approximate purchase date.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item" data-faq-item role="listitem">
+          <button type="button" class="faq-q" data-faq-toggle aria-expanded="false">
+            My school isn’t in the list
+          </button>
+          <div class="faq-a">
+            <p>
+              Email
+              <a data-support-email="fill" href="mailto:support@gpaceapp.org">support@gpaceapp.org</a>
+              with your school name and Canvas login URL. We can review adding it.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item" data-faq-item role="listitem">
+          <button type="button" class="faq-q" data-faq-toggle aria-expanded="false">
+            Sync failed or token invalid
+          </button>
+          <div class="faq-a">
+            <p>
+              Create a fresh access token in Canvas and paste it again. Confirm you copied the full token and that your
+              school URL matches the campus you signed into. If your school blocks third-party API access, sync may not
+              work until they allow it.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item" data-faq-item role="listitem">
+          <button type="button" class="faq-q" data-faq-toggle aria-expanded="false">
+            Do you store my password?
+          </button>
+          <div class="faq-a">
+            <p>
+              No. GPAce uses a Canvas access token you create — not your Canvas password. See the
+              <a href="privacy.html">Privacy Policy</a>.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item" data-faq-item role="listitem">
+          <button type="button" class="faq-q" data-faq-toggle aria-expanded="false">
+            How do grade notifications work?
+          </button>
+          <div class="faq-a">
+            <p>
+              If you enable notifications in Settings and allow permission, GPAce can alert you when a sync finds a newly
+              posted or changed assignment score. You can turn this off anytime.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h2>App Store</h2>
+      <p>
+        <a class="btn btn-primary" data-app-store href="https://apps.apple.com/app/id6792100451">
+          Download on the App Store
+        </a>
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="assets/icon.png" alt="" width="28" height="28" />
+          <span>GPAce</span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a data-support-email="fill" href="mailto:support@gpaceapp.org">support@gpaceapp.org</a>
+        </div>
+        <p class="footer-note">© <span data-year>2026</span> GPAce. Not affiliated with Instructure or Canvas LMS.</p>
+      </div>
+    </footer>
+
+    <script src="js/site-config.js?v=5"></script>
+    <script src="js/main.js?v=5"></script>
+  </body>
+</html>

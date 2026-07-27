@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "description": "GPAce marketing site — landing, privacy, support",
   "scripts": {
-    "start": "python3 -m http.server 5173",
-    "serve": "python3 -m http.server 5173"
+    "start": "python3 -m http.server 5173 --bind 127.0.0.1",
+    "serve": "python3 -m http.server 5173 --bind 127.0.0.1",
+    "dev": "python3 -m http.server 5173 --bind 127.0.0.1"
   }
 }

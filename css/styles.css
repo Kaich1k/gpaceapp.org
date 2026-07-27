@@ -1,24 +1,59 @@
-/* GPAce marketing site — matches app Nocturne + Inter / JetBrains Mono */
+/* GPAce marketing site — follows system light/dark */
 :root {
-  --bg: #0b1326;
-  --bg-low: #060e20;
-  --surface: #131b2e;
-  --surface-high: #171f33;
-  --surface-highest: #222a3d;
-  --text: #dae2fd;
-  --text-secondary: #c1c7d3;
-  --outline: #8b919d;
-  --border: #414751;
-  --primary: #a4c9ff;
-  --primary-container: #60a5fa;
-  --on-primary-container: #003a6b;
-  --secondary: #bcc7de;
-  --tertiary: #fabd34;
-  --success: #86efac;
+  color-scheme: light dark;
+
+  /* Light (system default when prefers-color-scheme: light) */
+  --bg: #eef3fb;
+  --bg-low: #e2eaf7;
+  --bg-mid: #f5f8fd;
+  --surface: #ffffff;
+  --surface-high: #f3f6fc;
+  --surface-highest: #e7edf8;
+  --text: #0f172a;
+  --text-secondary: #475569;
+  --outline: #64748b;
+  --border: #c5cedc;
+  --primary: #1d4ed8;
+  --primary-container: #3b82f6;
+  --on-primary-container: #ffffff;
+  --secondary: #334155;
+  --tertiary: #b45309;
+  --success: #15803d;
+  --header-bg: rgba(238, 243, 251, 0.88);
+  --header-border: rgba(100, 116, 139, 0.28);
+  --glow-a: rgba(59, 130, 246, 0.18);
+  --glow-b: rgba(37, 99, 235, 0.1);
+  --panel-border: rgba(100, 116, 139, 0.28);
   --radius: 12px;
   --max: 1120px;
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1326;
+    --bg-low: #060e20;
+    --bg-mid: #0e1830;
+    --surface: #131b2e;
+    --surface-high: #171f33;
+    --surface-highest: #222a3d;
+    --text: #dae2fd;
+    --text-secondary: #c1c7d3;
+    --outline: #8b919d;
+    --border: #414751;
+    --primary: #a4c9ff;
+    --primary-container: #60a5fa;
+    --on-primary-container: #003a6b;
+    --secondary: #bcc7de;
+    --tertiary: #fabd34;
+    --success: #86efac;
+    --header-bg: rgba(11, 19, 38, 0.82);
+    --header-border: rgba(65, 71, 81, 0.65);
+    --glow-a: rgba(96, 165, 250, 0.22);
+    --glow-b: rgba(164, 201, 255, 0.12);
+    --panel-border: rgba(65, 71, 81, 0.85);
+  }
 }
 
 *,
@@ -29,6 +64,8 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--bg);
+  color-scheme: light dark;
 }
 
 body {
@@ -38,9 +75,9 @@ body {
   font-size: 17px;
   line-height: 1.55;
   background:
-    radial-gradient(1000px 600px at 90% -5%, rgba(96, 165, 250, 0.22), transparent 55%),
-    radial-gradient(800px 500px at -5% 30%, rgba(164, 201, 255, 0.12), transparent 50%),
-    linear-gradient(180deg, var(--bg-low) 0%, var(--bg) 40%, #0e1830 100%);
+    radial-gradient(1000px 600px at 90% -5%, var(--glow-a), transparent 55%),
+    radial-gradient(800px 500px at -5% 30%, var(--glow-b), transparent 50%),
+    linear-gradient(180deg, var(--bg-low) 0%, var(--bg) 40%, var(--bg-mid) 100%);
   min-height: 100vh;
 }
 
@@ -64,8 +101,8 @@ a:hover {
   top: 0;
   z-index: 40;
   backdrop-filter: blur(14px);
-  background: rgba(11, 19, 38, 0.82);
-  border-bottom: 1px solid rgba(65, 71, 81, 0.65);
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
 }
 
 .nav {
@@ -367,7 +404,7 @@ a:hover {
 
 .panel {
   padding: 1.5rem;
-  border: 1px solid rgba(65, 71, 81, 0.85);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius);
   background: var(--surface);
 }
@@ -857,9 +894,9 @@ a:hover {
   align-items: center;
   padding: 1.75rem;
   border-radius: 16px;
-  border: 1px solid rgba(65, 71, 81, 0.85);
+  border: 1px solid var(--panel-border);
   background:
-    radial-gradient(500px 240px at 90% 10%, rgba(96, 165, 250, 0.16), transparent 60%),
+    radial-gradient(500px 240px at 90% 10%, var(--glow-a), transparent 60%),
     var(--surface);
 }
 
@@ -904,7 +941,7 @@ a:hover {
 
 .cta-band {
   text-align: center;
-  border-top: 1px solid rgba(65, 71, 81, 0.7);
+  border-top: 1px solid var(--header-border);
 }
 
 .cta-band h2 {
@@ -922,7 +959,7 @@ a:hover {
   padding: 1.35rem 1.4rem;
   margin: 0 0 2rem;
   border-radius: var(--radius);
-  border: 1px solid rgba(65, 71, 81, 0.85);
+  border: 1px solid var(--panel-border);
   background: var(--surface);
 }
 

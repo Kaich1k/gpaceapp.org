@@ -1,10 +1,15 @@
 const config = window.GPACE_SITE || {
-  appStoreUrl: "https://apps.apple.com/app/id6792100451",
+  appStoreUrl: "https://apps.apple.com/us/app/gpace-gpa-tracker/id6792100451",
+  playStoreUrl: "https://play.google.com/store/apps/details?id=com.kai.gpace",
   supportEmail: "support@gpaceapp.org",
 };
 
 document.querySelectorAll("[data-app-store]").forEach((el) => {
-  el.setAttribute("href", config.appStoreUrl);
+  if (config.appStoreUrl) el.setAttribute("href", config.appStoreUrl);
+});
+
+document.querySelectorAll("[data-play-store]").forEach((el) => {
+  if (config.playStoreUrl) el.setAttribute("href", config.playStoreUrl);
 });
 
 document.querySelectorAll("[data-support-email]").forEach((el) => {

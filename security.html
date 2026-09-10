@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GPAce — Canvas OAuth Security &amp; Privacy Summary</title>
+    <meta
+      name="description"
+      content="One-page security and privacy summary of GPAce Canvas OAuth: read-only student access, on-device grades, requested scopes."
+    />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e2eaf7" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B0F14" />
+    <link rel="icon" href="assets/favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css?v=17" />
+    <style>
+      .brief-hint {
+        margin: 0 0 1.25rem;
+        padding: 0.75rem 0.9rem;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--surface);
+        color: var(--text-secondary);
+        font-size: 0.92rem;
+      }
+      .brief-hint strong { color: var(--text); }
+      .brief h1 {
+        font-size: clamp(1.7rem, 4vw, 2.15rem);
+      }
+      .brief h2 {
+        margin: 1.35rem 0 0.45rem;
+        font-size: 1.05rem;
+      }
+      .brief p,
+      .brief li {
+        font-size: 0.95rem;
+        line-height: 1.45;
+      }
+      .brief .meta { margin-bottom: 0.9rem; }
+      .brief-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem 1.5rem;
+      }
+      .brief code,
+      .brief .mono {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        word-break: break-all;
+      }
+      .brief ul {
+        margin: 0.35rem 0 0;
+        padding-left: 1.15rem;
+      }
+      .brief .contact-line {
+        margin: 0.25rem 0;
+      }
+      @media (max-width: 640px) {
+        .brief-grid { grid-template-columns: 1fr; }
+      }
+      @media print {
+        :root {
+          --bg: #fff;
+          --bg-low: #fff;
+          --bg-mid: #fff;
+          --text: #111;
+          --text-secondary: #222;
+          --primary: #1d4ed8;
+          --border: #ccc;
+        }
+        html, body {
+          background: #fff !important;
+        }
+        body {
+          background: #fff !important;
+        }
+        .site-header,
+        .site-footer,
+        .brief-hint {
+          display: none !important;
+        }
+        .page {
+          max-width: none;
+          margin: 0;
+          padding: 0;
+        }
+        .brief h1 { font-size: 16pt; margin-bottom: 4pt; }
+        .brief h2 { font-size: 10.5pt; margin: 8pt 0 3pt; }
+        .brief p,
+        .brief li { font-size: 9pt; line-height: 1.32; color: #222; }
+        .brief .meta { font-size: 8pt; margin-bottom: 6pt; }
+        .brief code,
+        .brief .mono { font-size: 8pt; }
+        @page {
+          size: letter;
+          margin: 0.55in;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="index.html">
+          <img src="assets/icon.png" alt="" width="36" height="36" />
+          GPAce
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li>
+            <a class="nav-cta" href="index.html#download">Get the app</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="page legal brief">
+      <p class="brief-hint">
+        <strong>For reviewers:</strong> Print this page to a one-page PDF
+        (File → Print → Save as PDF). Public copy:
+        <a class="text-link" href="https://www.gpaceapp.org/security.html">gpaceapp.org/security.html</a>
+      </p>
+
+      <p class="section-label">Institutional review</p>
+      <h1>Canvas OAuth security &amp; privacy summary</h1>
+      <p class="meta">GPAce · September 2026 · Not a personal access token request</p>
+
+      <p>
+        GPAce is a student GPA tracker for iOS and Android
+        (<a class="text-link" href="https://www.gpaceapp.org/">gpaceapp.org</a>).
+        Students do not create a GPAce account. This note describes a
+        <strong>read-only Canvas OAuth Developer Key</strong>: one app registration
+        so a student can authorize <em>their own</em> Canvas login. We are not
+        asking the institution to issue tokens to the developer or to any student.
+      </p>
+
+      <h2>Access model</h2>
+      <ul>
+        <li>The student signs in with their own school Canvas / SSO credentials on Canvas’s login page.</li>
+        <li>The resulting token is limited to that student. GPAce cannot see other students’ records.</li>
+        <li>No write, delete, admin, masquerade, or SIS provisioning scopes.</li>
+        <li>The student can disconnect in the app or revoke the app in Canvas (Account → Settings) at any time.</li>
+      </ul>
+
+      <div class="brief-grid">
+        <div>
+          <h2>Requested Canvas scopes (GET only)</h2>
+          <ul>
+            <li><code>url:GET|/api/v1/users/:user_id/profile</code></li>
+            <li><code>url:GET|/api/v1/courses</code></li>
+            <li><code>url:GET|/api/v1/courses/:id</code></li>
+            <li><code>url:GET|/api/v1/courses/:course_id/assignment_groups</code></li>
+            <li><code>url:GET|/api/v1/courses/:course_id/assignments</code></li>
+          </ul>
+          <p>
+            Used for: the student’s profile, enrollments, category weights,
+            assignments, and that student’s scores (including
+            <code>include[]=submission</code> on their own assignments).
+          </p>
+        </div>
+        <div>
+          <h2>Not in scope</h2>
+          <ul>
+            <li>Posting, editing, or deleting grades or content</li>
+            <li>Instructor or admin roles</li>
+            <li>Other users’ accounts or gradebooks</li>
+            <li>LTI placement inside Canvas courses</li>
+            <li>Advertising or sale of academic data</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Where data is stored</h2>
+      <ul>
+        <li>
+          <strong>Grades and course data</strong> stay on the student’s device.
+          GPAce does not operate a grade database or student profile store.
+        </li>
+        <li>
+          <strong>OAuth tokens</strong> are stored on device (iOS/Android secure storage).
+          The GPAce backend holds the Developer Key <em>client secret</em> (it cannot
+          live in the mobile app) and exchanges the authorization code / refresh token
+          with Canvas. Tokens are returned to the device and are not kept as a grade archive.
+        </li>
+        <li>
+          After login, the native apps call Canvas from the device. A request proxy exists
+          for web use; it forwards an API call and does not retain grade records.
+        </li>
+        <li>
+          Optional school-search analytics record query text and selected school id only — not names, tokens, or grades.
+        </li>
+        <li>
+          In-app purchases go through Apple or Google and RevenueCat. Payment processors
+          never receive Canvas credentials or gradebooks.
+        </li>
+      </ul>
+
+      <h2>OAuth configuration</h2>
+      <p class="contact-line">
+        Redirect URI (register on the Developer Key):
+        <span class="mono">https://gpace-api.onrender.com/auth/canvas/callback</span>
+      </p>
+      <p class="contact-line">
+        App return (allowlisted): <span class="mono">gpace://</span>
+      </p>
+      <p>
+        The backend only completes the OAuth redirect to that GPAce app scheme.
+        It will not hand an authorization code to an arbitrary URL.
+      </p>
+
+      <h2>Student controls &amp; contact</h2>
+      <p>
+        Disconnect Canvas in the app, delete local courses, or uninstall to remove
+        on-device academic data. Full policy:
+        <a class="text-link" href="privacy.html">gpaceapp.org/privacy.html</a>.
+      </p>
+      <p class="contact-line">
+        Developer: Kai Greenberg, student, The University of Texas at Dallas
+      </p>
+      <p class="contact-line">
+        Privacy / review:
+        <a class="text-link" href="mailto:support@gpaceapp.org">support@gpaceapp.org</a>
+        · iOS <span class="mono">com.kai.gpace</span>
+        · Android <span class="mono">com.kai.gpace</span>
+      </p>
+      <p class="fine-print">
+        GPAce is not affiliated with Instructure, Inc. or the student’s institution.
+        Canvas is a trademark of its respective owners. This summary describes the
+        current GPAce implementation as of September 2026.
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="assets/icon.png" alt="" width="28" height="28" />
+          <span>GPAce</span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="support.html">Support</a>
+          <a data-support-email="fill" href="mailto:support@gpaceapp.org">support@gpaceapp.org</a>
+        </div>
+        <p class="footer-note">© <span data-year>2026</span> GPAce.</p>
+      </div>
+    </footer>
+
+    <script src="js/site-config.js?v=5"></script>
+    <script src="js/main.js?v=5"></script>
+  </body>
+</html>

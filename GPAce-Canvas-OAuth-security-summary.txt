@@ -1,0 +1,127 @@
+GPAce — Canvas OAuth security and privacy summary
+For institutional review of a Developer Key
+September 2026
+
+This describes a read-only Canvas OAuth Developer Key for GPAce. It is not a request for personal access tokens, admin access, or an LTI tool inside courses. Providing this information does not guarantee approval. GPAce is an independently operated third-party application, not an institutionally supported integration.
+
+1. What GPAce is
+
+GPAce is a student GPA tracker for iOS and Android.
+Website: https://www.gpaceapp.org/
+App Store: https://apps.apple.com/us/app/gpace-gpa-tracker/id6792100451
+Google Play: https://play.google.com/store/apps/details?id=com.kai.gpace
+Bundle / package ID: com.kai.gpace
+Privacy policy: https://www.gpaceapp.org/privacy.html
+
+Students do not create a GPAce account. They can add courses by hand for free. Canvas sync is optional. Each student authorizes only their own Canvas account. Grade calculations stay on that student’s device.
+
+Developer: Kai Greenberg, student at The University of Texas at Dallas
+Review / privacy contact: support@gpaceapp.org
+
+GPAce is not affiliated with Instructure or with the student’s institution.
+
+2. What we are requesting
+
+One Canvas OAuth Developer Key (API key) for GPAce. Students then sign in themselves on the school’s Canvas / SSO login page. We are not asking the institution to issue tokens to the developer or to any student.
+
+The school can disable or delete the key at any time. That is the institutional kill switch.
+
+3. Exact Canvas API scopes and endpoints
+
+Please enforce scopes on the Developer Key. Grant only these GET scopes (paste them; do not use Canvas’s “Read only” checkbox, which selects every GET endpoint in Canvas):
+
+url:GET|/api/v1/users/:user_id/profile
+url:GET|/api/v1/courses
+url:GET|/api/v1/courses/:id
+url:GET|/api/v1/courses/:course_id/assignment_groups
+url:GET|/api/v1/courses/:course_id/assignments
+
+Also enable “Allow Include Parameters” on the key.
+
+GPAce does not call extra endpoints for scores. It uses Canvas include[] on the endpoints above so the authorizing student can see their own enrollment totals and assignment submissions. On a scoped key, Canvas ignores include[] unless that box is on. Without it, OAuth can succeed and grades will not sync. Includes are limited to the authorizing user’s nested data on those GET endpoints (term, enrollments, total_scores, course_image on courses; submission on assignments).
+
+When requesting the token, GPAce sends those same five scopes in the OAuth scope parameter so the grant matches the key.
+
+Calls the app actually makes for the signed-in student:
+
+GET /api/v1/users/self/profile
+GET /api/v1/courses
+  query: enrollment_state=active
+  include[]=term, total_scores, enrollments, course_image
+GET /api/v1/courses/:id
+GET /api/v1/courses/:course_id/assignment_groups
+GET /api/v1/courses/:course_id/assignments
+  include[]=submission
+  order_by=due_at
+
+include[]=submission is used only so the authorizing student can see their own scores, graded_at, and posted_at. The app does not request other users’ submissions.
+
+Redirect URI to register on the key:
+https://gpace-api.onrender.com/auth/canvas/callback
+
+Not requested: any POST, PUT, DELETE, or PATCH; admin or masquerade; other students’ data; conversations; files APIs; SIS; LTI.
+
+4. How access and refresh tokens are handled
+
+Login
+1. The student starts Canvas login in GPAce.
+2. The GPAce backend redirects them to the school’s Canvas OAuth authorize URL (Canvas’s own login / SSO).
+3. Canvas returns an authorization code to https://gpace-api.onrender.com/auth/canvas/callback.
+4. The backend will only forward that code to the GPAce app (gpace://). It will not send the code to an arbitrary URL.
+5. The app sends the code back to the backend. The backend exchanges it with Canvas for an access token and refresh token, using the Developer Key client secret. The secret is stored as a server environment variable. It is not shipped in the mobile app.
+6. The backend returns those tokens to the app in the HTTPS response. It does not write them to a database.
+
+On the device
+Access and refresh tokens are stored in iOS/Android secure storage (Expo SecureStore). Course names, grades, and settings are stored locally on the device.
+
+Refresh
+Canvas access tokens expire in about one hour. Shortly before expiry, the app sends the refresh token to the GPAce backend. The backend calls Canvas’s token endpoint and returns a new access token to the device. Canvas reuses the same refresh token. Refresh tokens are not stored on the GPAce server after the request finishes.
+
+Revocation
+The student can disconnect Canvas in GPAce, which deletes the tokens from the device. They can also revoke the app in Canvas (Account → Settings). The school can disable or delete the Developer Key at any time, which stops all GPAce OAuth logins for that campus.
+
+5. What passes through GPAce infrastructure, and what is retained
+
+Hosting: a small Node.js service on Render (https://gpace-api.onrender.com). TLS is terminated by Render.
+
+Passes through the backend (in memory, for the duration of the HTTP request only):
+• OAuth authorization code
+• Access token and refresh token, during code exchange and token refresh
+• The Developer Key client id and secret, when talking to Canvas’s token endpoint
+
+After login, the iOS and Android apps fetch courses and grades directly from Canvas. Token refresh still goes through the GPAce backend (the client secret cannot live in the app). Grade JSON does not pass through GPAce’s server.
+
+What is retained on GPAce servers:
+• Developer Key client id and secret (environment variables), if the school issues a key
+• Optional school-search stats: search text and selected school id. No student name, email, token, or grades.
+• No student accounts. No grade database. No token store. Application code does not log tokens or grade payloads.
+
+Honest limit: GPAce does not keep a copy of student grade data, but the hosting provider (Render) could have its own request logs. Tokens are not written to a GPAce application database because there isn’t one for this.
+
+Purchases (Apple, Google, RevenueCat) are separate from Canvas. They do not receive Canvas tokens or gradebooks.
+
+6. Long-term ownership and support
+
+GPAce is independently operated by Kai Greenberg. It is not a campus system, not a vendor under contract, and not an institutionally supported integration. There is no SLA, SOC 2 report, or 24/7 operations staff.
+
+What exists today:
+• Public App Store and Google Play listings under com.kai.gpace
+• Support inbox: support@gpaceapp.org
+• Public privacy policy
+• The developer maintains the mobile apps and the Render OAuth service
+
+If a school issues a key and later wants it gone: disable the Developer Key in Canvas. On request, the key will also be removed from the GPAce backend.
+
+If GPAce is no longer maintained: the school should disable the key. Existing installs would fail Canvas login. Local grades already on a student’s phone would remain on that phone until the student deletes them.
+
+7. What we are asking the school to do
+
+If the school is willing to proceed despite the third-party / governance caveats:
+
+1. Create a Canvas Developer Key named “GPAce”
+2. Enforce scopes and paste only the five GET scopes listed above (do not use “Read only”)
+3. Enable “Allow Include Parameters”
+4. Register redirect URI: https://gpace-api.onrender.com/auth/canvas/callback
+5. Send the client id, and the client secret by a channel the school prefers, to support@gpaceapp.org or Kai.Greenberg@UTDallas.edu
+
+If the school is not willing to issue a key to an independent student app, a written no is enough. We will not ask campus staff to issue personal access tokens to students.

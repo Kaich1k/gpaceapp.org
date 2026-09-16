@@ -1,8 +1,8 @@
-GPAce — Canvas OAuth security and privacy summary
+GPAce: Canvas OAuth security and privacy summary
 For institutional review of a Developer Key
 September 2026
 
-This describes a read-only Canvas OAuth Developer Key for GPAce. It is not a request for personal access tokens, admin access, or an LTI tool inside courses. Providing this information does not guarantee approval. GPAce is an independently operated third-party application, not an institutionally supported integration.
+This describes a read only Canvas OAuth Developer Key for GPAce. It is not a request for personal access tokens, admin access, or an LTI tool inside courses. Providing this information does not guarantee approval. GPAce is an independently operated third party application, not an institutionally supported integration.
 
 1. What GPAce is
 
@@ -42,7 +42,7 @@ GPAce does not call extra endpoints for scores. It uses Canvas include[] on the 
 
 When requesting the token, GPAce sends those same five scopes in the OAuth scope parameter so the grant matches the key.
 
-Calls the app actually makes for the signed-in student:
+Calls the app actually makes for the signed in student:
 
 GET /api/v1/users/self/profile
 GET /api/v1/courses
@@ -78,7 +78,7 @@ Refresh
 Canvas access tokens expire in about one hour. Shortly before expiry, the app sends the refresh token to the GPAce backend. The backend calls Canvas’s token endpoint and returns a new access token to the device. Canvas reuses the same refresh token. Refresh tokens are not stored on the GPAce server after the request finishes.
 
 Revocation
-The student can disconnect Canvas in GPAce, which deletes the tokens from the device. They can also revoke the app in Canvas (Account → Settings). The school can disable or delete the Developer Key at any time, which stops all GPAce OAuth logins for that campus.
+The student can disconnect Canvas in GPAce, which deletes the tokens from the device. They can also revoke the app in Canvas (Account, then Settings). The school can disable or delete the Developer Key at any time, which stops all GPAce OAuth logins for that campus.
 
 5. What passes through GPAce infrastructure, and what is retained
 
@@ -93,14 +93,14 @@ After login, the iOS and Android apps fetch courses and grades directly from Can
 
 What is retained on GPAce servers:
 • Developer Key client id and secret (environment variables), if the school issues a key
-• Optional school-search stats: search text and selected school id. No student name, email, token, or grades.
+• Optional school search stats: search text and selected school id. No student name, email, token, or grades.
 • No student accounts. No grade database. No token store. Application code does not log tokens or grade payloads.
 
 Honest limit: GPAce does not keep a copy of student grade data, but the hosting provider (Render) could have its own request logs. Tokens are not written to a GPAce application database because there isn’t one for this.
 
 Purchases (Apple, Google, RevenueCat) are separate from Canvas. They do not receive Canvas tokens or gradebooks.
 
-6. Long-term ownership and support
+6. Long term ownership and support
 
 GPAce is independently operated by Kai Greenberg. It is not a campus system, not a vendor under contract, and not an institutionally supported integration. There is no SLA, SOC 2 report, or 24/7 operations staff.
 
@@ -116,7 +116,7 @@ If GPAce is no longer maintained: the school should disable the key. Existing in
 
 7. What we are asking the school to do
 
-If the school is willing to proceed despite the third-party / governance caveats:
+If the school is willing to proceed despite the third party / governance caveats:
 
 1. Create a Canvas Developer Key named “GPAce”
 2. Enforce scopes and paste only the five GET scopes listed above (do not use “Read only”)

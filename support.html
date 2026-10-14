@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Support | GPAce</title>
-    <meta name="description" content="GPAce support: Canvas tokens, GPA tracking, purchases, and contact." />
+    <meta name="description" content="GPAce support: Canvas sign-in, GPA tracking, purchases, and contact." />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e2eaf7" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B0F14" />
     <link rel="icon" href="assets/favicon.png" type="image/png" />
@@ -49,32 +49,27 @@
         <p>Canvas sync, school search, Pro restore, GPA math.</p>
       </div>
 
-      <h2 id="canvas-token">Canvas access token</h2>
+      <h2 id="canvas">Connect Canvas</h2>
       <ol class="steps">
         <li>
-          <strong>Open Canvas in a browser</strong>
-          <span>Sign in to your school’s Canvas site (the same URL you use for classes).</span>
+          <strong>Unlock Pro</strong>
+          <span>Canvas sync is a one-time purchase. Adding courses yourself stays free.</span>
         </li>
         <li>
-          <strong>Account, then Settings</strong>
-          <span>Left sidebar or profile menu: Account, then Settings.</span>
+          <strong>Search your campus</strong>
+          <span>Open the Canvas tab and search. If your school is not supported yet, add courses yourself.</span>
         </li>
         <li>
-          <strong>New Access Token</strong>
-          <span>Under Approved Integrations, choose New Access Token. Give it a name like “GPAce” and create it.</span>
+          <strong>Sign in with Canvas</strong>
+          <span>If the campus is supported, sign in on your school’s Canvas page. GPAce does not ask for your password.</span>
         </li>
         <li>
-          <strong>Copy the token once</strong>
-          <span>Canvas shows the full token only once. Paste it into GPAce before leaving the page.</span>
-        </li>
-        <li>
-          <strong>Import in the app</strong>
-          <span>In GPAce, open the Canvas tab, find your school, paste the token, and sync.</span>
+          <strong>Sync</strong>
+          <span>After sign-in, sync to pull courses and grades.</span>
         </li>
       </ol>
       <p class="fine-print">
-        You can revoke the token anytime in Canvas: Account, then Settings, then Approved Integrations. GPAce stores the token
-        on your device only.
+        Disconnect anytime in the Canvas tab. That removes the Canvas sign-in from this phone. Your courses stay until you delete them.
       </p>
 
       <h2>FAQ</h2>
@@ -94,7 +89,7 @@
           <div class="faq-a">
             <p>
               Pro is $9.99, paid once. It unlocks Canvas import (pull courses and refresh them from your school’s
-              Canvas). Not a subscription. After you unlock, paste an access token. Courses do not sync until then.
+              Canvas). Not a subscription. After you unlock, sign in if your campus is supported. Courses do not sync until then.
             </p>
           </div>
         </div>
@@ -105,7 +100,7 @@
           <div class="faq-a">
             <p>
               Finding your school in the list is not connecting. GPAce only syncs after you unlock Pro and
-              paste a Canvas access token (or finish sign in). Until then, Force Sync and auto sync won’t pull grades.
+              finish Canvas sign-in. Until then, sync will not pull grades.
             </p>
           </div>
         </div>
@@ -134,13 +129,12 @@
         </div>
         <div class="faq-item" data-faq-item role="listitem">
           <button type="button" class="faq-q" data-faq-toggle aria-expanded="false">
-            Sync failed or token invalid
+            Sync failed
           </button>
           <div class="faq-a">
             <p>
-              Create a fresh access token in Canvas and paste it again. Confirm you copied the full token and that your
-              school URL matches the campus you signed into. If your school blocks third party API access, sync may not
-              work until they allow it.
+              Disconnect Canvas in the app and sign in again. If your campus is not supported, sync will not work
+              until that school is set up. You can add courses yourself in the meantime.
             </p>
           </div>
         </div>
@@ -150,7 +144,7 @@
           </button>
           <div class="faq-a">
             <p>
-              No. GPAce uses a Canvas access token you create, not your Canvas password. See the
+              No. You sign in on your school’s Canvas page. GPAce never asks for your Canvas password. See the
               <a href="privacy.html">Privacy Policy</a>.
             </p>
           </div>
